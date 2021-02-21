@@ -4,7 +4,7 @@
     <div class="menu">
       <router-link to="index" tag="button">首页</router-link>
       <router-link to="group" tag="button">书签组</router-link>
-      <hide-btn btnName="切换内容" :groupsList="testContent" :liClick="liClick"></hide-btn>
+      <hide-btn btnName="切换内容" :groupsList="jsonNameList" :liClick="liClick"></hide-btn>
       <hide-btn btnName="跳转分组" :groupsList="groupsList"></hide-btn>
     </div>
   </nav>
@@ -21,21 +21,15 @@
                     this.url = jsonFileName;
                     this.flush();
                     return false;
-                },
-                testContent: [
-                    {'title': 'sq1'},
-                    {'title': 'sq2'},
-                    {'title': 'sq3'},
-                    {'title': 'sq4'},
-                    {'title': 'sq5'},
-                    {'title': 'sq6'},
-                    {'title': 'sq7'},
-                    {'title': 'sq8'},
-                ]
+                }
             }
         },
         props: {
-            groupsList: Array
+            groupsList: Array,
+            jsonNameList: {
+              type: Array,
+              default: [{'title': 'sq1'}]
+            }
         },
         components:{
             HideBtn

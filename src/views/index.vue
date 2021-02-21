@@ -11,6 +11,7 @@
 </template>
 
 <script>
+    import {request} from "network/request";
     export default {
         name: "index"
     }

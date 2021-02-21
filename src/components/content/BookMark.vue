@@ -1,9 +1,9 @@
 <template>
   <div class="one-tab">
     <div class="top"></div>
-    <tab-bar @SearchUrl="flush" ref="tabBar" :groupsList="groupsList"/>
+    <tab-bar @SearchUrl="flush" ref="tabBar" :groupsList="groupsList" :jsonNameList="jsonNameList"/>
     <router-view name="index"/>
-    <router-view name="group" v-for="group in groupsList" :group="group"/>
+    <router-view name="group" v-for="(group, index) in groupsList" :group="group" :key="index"/>
     <div id="bottom"></div>
   </div>
 </template>
@@ -18,7 +18,8 @@
       data(){
           return{
               groupsList: [],
-              groupsLength: 0
+              groupsLength: 0,
+              jsonNameList: [{'title': 'sq1'}]
           }
       },
       components: {
@@ -37,7 +38,20 @@
               console.log(err);
               alert('请求数据失败！\n');
           })
+          },
+          jsonName(){
+            request({
+              url: '/jsonName.json'
+            }).then((result) => {
+              this.jsonNameList = result['data'];
+            }).catch((err) => {
+              console.log(err);
+              throw err;
+            });
           }
+      },
+      created(){
+        this.jsonName();
       }
     }
 </script>
